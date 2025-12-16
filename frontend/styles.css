@@ -1,0 +1,560 @@
+/* Transitions */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in.active {
+    opacity: 1;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 200px;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+:root {
+    --card-bg: #ffffff;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent: #007aff;
+    --accent-hover: #0071e3;
+    --danger: #ff3b30;
+    --success: #34c759;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    /* No Global Scroll */
+    line-height: 1.5;
+}
+
+/* Layout utils */
+.h-full {
+    height: 100%;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+    min-height: 0;
+    /* Critical for scrolling inside flex */
+}
+
+.scroll-y {
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: none;
+    /* Hidden by default until login/mode select */
+}
+
+.visible {
+    display: block;
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+}
+
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.col-2 {
+    grid-template-columns: 2fr 1fr;
+    /* Adjusted ratio for Product Grid vs Cart */
+}
+
+.pos-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    /* Main (Products) vs Right Panel (Cart) fixed width */
+    gap: 20px;
+    height: 100%;
+}
+
+/* Components */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+button.secondary {
+    background: #e8e8ed;
+    color: var(--text-primary);
+}
+
+button.danger {
+    background: var(--danger);
+}
+
+/* Login Screen */
+#login-screen {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+/* POS Specific */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.product-item {
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.product-item:hover {
+    border-color: var(--accent);
+}
+
+/* Cart */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Mobile App Specific */
+.mobile-app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.points-card {
+    background: linear-gradient(135deg, #007aff, #00d4ff);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.points-val {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.qr-code {
+    background: white;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.offer-card {
+    border-left: 4px solid var(--accent);
+    margin-bottom: 15px;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    width: 90%;
+    max-width: 500px;
+}
+
+/* Utilities */
+.text-sm {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+
+/* Sidebar & Layout */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--card-bg);
+    border-right: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: calc(100vh - 64px);
+    position: fixed;
+    left: 0;
+    top: 64px;
+    transition: transform 0.3s;
+    z-index: 100;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    margin-top: 64px;
+    transition: margin-left 0.3s;
+    padding: 20px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+}
+
+.main-content.expanded {
+    margin-left: 0;
+}
+
+.nav-link {
+    display: block;
+    padding: 12px 15px;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: background 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #f0f0f5;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* Header Tweaks */
+/* Header Tweaks */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    z-index: 1001;
+    background: var(--bg-color);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 20px;
+}
+
+/* Stock Tooltip */
+.stock-tooltip {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.product-item {
+    position: relative;
+}
+
+.product-item:hover .stock-tooltip {
+    opacity: 1;
+}
+
+/* Customer Metrics */
+.customer-metrics {
+    background: #f9f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* --- Analytics Dashboard --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-rows: auto 400px 300px;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Row 1: KPI Cards */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.kpi-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.kpi-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.kpi-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 10px 0;
+}
+
+.kpi-trend {
+    font-size: 13px;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Row 2: Main Chart */
+.chart-container-main {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Row 3: Sub Charts */
+.sub-charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.chart-container-sub {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 100%;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+/* --- Analytics Dashboard --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-rows: auto 400px 300px;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Row 1: KPI Cards */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.kpi-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.kpi-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.kpi-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 10px 0;
+}
+
+.kpi-trend {
+    font-size: 13px;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Row 2: Main Chart */
+.chart-container-main {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Row 3: Sub Charts */
+.sub-charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.chart-container-sub {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    height: 100%;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}

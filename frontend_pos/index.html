@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Speed POS | Terminal 01</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <span class="store-name">Apex Grocery</span>
+            <span class="terminal-id">TERM-01</span>
+            <div class="status-indicator online" title="Online"></div>
+        </div>
+        <div class="header-right">
+            <span style="font-size: 0.9rem">Cashier: <strong>Alex M.</strong></span>
+            <button class="btn-danger" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem">Lock</button>
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-layout">
+
+        <!-- Search Bar -->
+        <div class="search-bar-container">
+            <input type="text" id="omni-search" placeholder="Scan Barcode / SKU / Name (F1)" autocomplete="off">
+        </div>
+
+        <!-- Ticket Panel (Left) -->
+        <section class="ticket-panel">
+            <div class="ticket-header">
+                <div>Qty</div>
+                <div>Product</div>
+                <div>Price</div>
+                <div>Total</div>
+                <div>Act</div>
+            </div>
+            <div id="ticket-items" class="ticket-items">
+                <!-- Items injected here -->
+            </div>
+        </section>
+
+        <!-- Actions Panel (Right) -->
+        <section class="actions-panel">
+            <div id="quick-grid" class="quick-grid">
+                <!-- Quick buttons injected here -->
+            </div>
+
+            <!-- Soft Numpad -->
+            <div class="numpad">
+                <button class="num-key" data-key="7">7</button>
+                <button class="num-key" data-key="8">8</button>
+                <button class="num-key" data-key="9">9</button>
+
+                <button class="num-key" data-key="4">4</button>
+                <button class="num-key" data-key="5">5</button>
+                <button class="num-key" data-key="6">6</button>
+
+                <button class="num-key" data-key="1">1</button>
+                <button class="num-key" data-key="2">2</button>
+                <button class="num-key" data-key="3">3</button>
+
+                <button class="num-key" data-key="backspace">⌫</button>
+                <button class="num-key" data-key="0">0</button>
+                <button class="num-key btn-primary" data-key="enter">↵</button>
+            </div>
+        </section>
+
+        <!-- Footer / Payment -->
+        <footer class="footer-totals">
+            <div class="total-display">
+                <span class="total-label">Total Due</span>
+                <span id="total-amount" class="total-amount">$0.00</span>
+            </div>
+
+            <div class="payment-actions">
+                <button id="pay-btn" class="btn-success pay-btn" onclick="openPaymentModal()">
+                    PAY (F5)
+                    <small>Cash / Card</small>
+                </button>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Modals -->
+    <div id="weight-modal" class="modal-overlay">
+        <div class="modal">
+            <h2>Weigh Item</h2>
+            <h3 id="weight-product-name" style="margin-bottom: 20px; color: var(--color-text-secondary)">Product</h3>
+            <input type="number" id="weight-input" placeholder="Enter Weight (kg)"
+                style="width: 100%; font-size: 2rem; padding: 10px; margin-bottom: 20px; text-align: center;">
+            <button class="btn-success" style="width: 100%; padding: 15px; font-size: 1.2rem"
+                onclick="confirmWeight()">Confirm Weight</button>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal">
+            <h2>Payment</h2>
+            <div id="pay-total-display"
+                style="font-size: 3rem; font-weight: 800; margin-bottom: 20px; text-align: center;">$0.00</div>
+
+            <div id="denom-grid" class="denomination-grid">
+                <!-- Smart denoms -->
+            </div>
+
+            <input type="number" id="received-input" placeholder="Amount Received"
+                style="width: 100%; font-size: 2rem; padding: 10px; margin-bottom: 10px; text-align: center;">
+
+            <div id="change-display" class="change-display" style="display:none">Change: $0.00</div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-danger" style="flex:1; padding: 15px;" onclick="closePaymentModal()">Cancel</button>
+                <button class="btn-success" style="flex:1; padding: 15px;" onclick="calculateChange()">Complete
+                    (Enter)</button>
+                </dvi>
+            </div>
+        </div>
+
+        <div id="toast" class="toast">Message</div>
+
+        <script type="module" src="script.js"></script>
+</body>
+
+</html>

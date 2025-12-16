@@ -1,0 +1,12 @@
+Starting Log...
+Running seed_analytics_data...
+Starting Analytics Seeding...
+Ensured 5 Categories.
+Ensured 3 Locations.
+Ensured 50+ Products.
+Error: (psycopg.errors.NotNullViolation) el valor nulo en la columna «unit_cost_at_sale» de la relación «transaction_details» viola la restricción “not-null”
+DETAIL:  La fila que falla contiene (22, 15, 580, 1, 6.15, null).
+[SQL: INSERT INTO transaction_details (transaction_id, product_id, quantity, unit_price, unit_cost_at_sale) SELECT p0::INTEGER, p1::INTEGER, p2::INTEGER, p3::NUMERIC(10, 2), p4::NUMERIC(10, 2) FROM (VALUES (%(transaction_id__0)s::INTEGER, %(product_id__0)s ... 388 characters truncated ...  sen_counter) ORDER BY sen_counter RETURNING transaction_details.id, transaction_details.id AS id__1]
+[parameters: {'transaction_id__0': 15, 'quantity__0': 1, 'unit_price__0': Decimal('6.15'), 'unit_cost_at_sale__0': None, 'product_id__0': 580, 'transaction_id__1': 15, 'quantity__1': 1, 'unit_price__1': Decimal('1.77'), 'unit_cost_at_sale__1': None, 'product_id__1': 589, 'transaction_id__2': 15, 'quantity__2': 3, 'unit_price__2': Decimal('15.63'), 'unit_cost_at_sale__2': None, 'product_id__2': 561}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+FINISHED SUCCESS.
